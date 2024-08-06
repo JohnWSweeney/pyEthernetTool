@@ -1,35 +1,43 @@
 # main.py
+import time
 import socket
 
 print("pyEthernetTool")
 
-def test():
-	print("server started")
-	
-	HOST = "127.0.0.1"
-	PORT = 1234
+# def server():
+# 	print("server started")
+# 	HOST = "127.0.0.1"
+# 	PORT = 1234
+# 	buf = 20
 
-	buf = 20
+# 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# 	server.bind((HOST, PORT))
+# 	server.listen(1)
+# 	print("listening")
 
+# 	while True:
+# 		conn, addr = server.accept()
+# 		print('address: ', addr)
+# 		data = conn.recv(buf)
+# 		if data:
+# 			print("data: ", data)
+
+def client():
+	print("client started")
+	host = "127.0.0.1"
+	port = 1234
+	msg = "hellyeah"
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.bind((HOST, PORT))
-	print("bind")
-	s.listen(1)
-	print("listening")
-
-	conn, addr = s.accept()
-	print('address: ', addr)
-	while 1:
-		data = conn.recv(buf)
-		if not data: break
-		print("data: ", data)
+	s.connect((host, port))
+	while True:
+		s.send(msg.encode('utf-8'))
+		time.sleep(1)
+	print("client stopped")
 
 def main():
-	print("test start")
-	test()
-	print("test end")
-	
-	input()
+	print("sdfg")
+	# server()
+	client()
 
 if __name__ == "__main__":
 	main()

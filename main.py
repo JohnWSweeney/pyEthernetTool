@@ -2,8 +2,6 @@
 import time
 import socket
 
-print("pyEthernetTool")
-
 # def server():
 # 	print("server started")
 # 	HOST = "127.0.0.1"
@@ -22,22 +20,22 @@ print("pyEthernetTool")
 # 		if data:
 # 			print("data: ", data)
 
-def client():
-	print("client started")
+def client(host, port, msg):
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect((host, port))
+	try:
+		s.send(msg.encode('utf-8'))
+	except:
+		print("client send failed.")
+	s.close()
+
+def main():
+	print("pyEthernetTool")
+	# server()
 	host = "127.0.0.1"
 	port = 1234
 	msg = "hellyeah"
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((host, port))
-	while True:
-		s.send(msg.encode('utf-8'))
-		time.sleep(1)
-	print("client stopped")
-
-def main():
-	print("sdfg")
-	# server()
-	client()
+	client(host, port, msg)
 
 if __name__ == "__main__":
 	main()
